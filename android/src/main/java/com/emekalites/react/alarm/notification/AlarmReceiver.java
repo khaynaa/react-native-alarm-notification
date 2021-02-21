@@ -39,12 +39,14 @@ public class AlarmReceiver extends BroadcastReceiver {
                         Log.d(TAG, "alarm start: " + alarm.toString() + ", alarms left: " + alarms.size());
                     } catch (Exception e) {
                         alarmUtil.stopAlarmSound();
-                        e.printStackTrace();
+                        //e.printStackTrace();
+                        Log.e(TAG, "getAlarmList: exception cause " + e.getCause() + " message " + e.getMessage());
                     }
                 }
 
             } catch (Exception e) {
-                e.printStackTrace();
+                //e.printStackTrace();
+                Log.e(TAG, "getAlarmList: exception cause " + e.getCause() + " message " + e.getMessage());
             }
 
             String action = intent.getAction();
@@ -62,7 +64,8 @@ public class AlarmReceiver extends BroadcastReceiver {
                             alarmUtil.removeFiredNotification(alarm.getId());
                         } catch (Exception e) {
                             alarmUtil.stopAlarmSound();
-                            e.printStackTrace();
+                            //e.printStackTrace();
+                            Log.e(TAG, "getAlarmList: exception cause " + e.getCause() + " message " + e.getMessage());
                         }
                         break;
 
@@ -81,7 +84,8 @@ public class AlarmReceiver extends BroadcastReceiver {
                             alarmUtil.cancelAlarm(alarm, false);
                         } catch (Exception e) {
                             alarmUtil.stopAlarmSound();
-                            e.printStackTrace();
+                            //e.printStackTrace();
+                            Log.e(TAG, "getAlarmList: exception cause " + e.getCause() + " message " + e.getMessage());
                         }
                         break;
                 }

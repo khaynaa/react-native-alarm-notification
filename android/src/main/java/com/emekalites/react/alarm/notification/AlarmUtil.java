@@ -119,11 +119,15 @@ class AlarmUtil {
     }
 
     void setBootReceiver() {
-        ArrayList<AlarmModel> alarms = getAlarmDB().getAlarmList(1);
-        if (alarms.size() > 0) {
-            enableBootReceiver(mContext);
-        } else {
-            disableBootReceiver(mContext);
+        try{
+            ArrayList<AlarmModel> alarms = getAlarmDB().getAlarmList(1);
+            if (alarms.size() > 0) {
+                enableBootReceiver(mContext);
+            } else {
+                disableBootReceiver(mContext);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
         }
     }
 
@@ -305,24 +309,32 @@ class AlarmUtil {
     }
 
     private void enableBootReceiver(Context context) {
-        ComponentName receiver = new ComponentName(context, AlarmBootReceiver.class);
-        PackageManager pm = context.getPackageManager();
+        try{
+            ComponentName receiver = new ComponentName(context, AlarmBootReceiver.class);
+            PackageManager pm = context.getPackageManager();
 
-        int setting = pm.getComponentEnabledSetting(receiver);
-        if (setting == PackageManager.COMPONENT_ENABLED_STATE_DISABLED) {
-            pm.setComponentEnabledSetting(receiver,
-                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-                    PackageManager.DONT_KILL_APP);
+            int setting = pm.getComponentEnabledSetting(receiver);
+            if (setting == PackageManager.COMPONENT_ENABLED_STATE_DISABLED) {
+                pm.setComponentEnabledSetting(receiver,
+                        PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                        PackageManager.DONT_KILL_APP);
+            }
+        }catch (Exception e) {
+            Log.e(TAG, "failed to enableBootReceiver", e);
         }
     }
 
     private void disableBootReceiver(Context context) {
-        ComponentName receiver = new ComponentName(context, AlarmBootReceiver.class);
-        PackageManager pm = context.getPackageManager();
+        try{
+            ComponentName receiver = new ComponentName(context, AlarmBootReceiver.class);
+            PackageManager pm = context.getPackageManager();
 
-        pm.setComponentEnabledSetting(receiver,
-                PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                PackageManager.DONT_KILL_APP);
+            pm.setComponentEnabledSetting(receiver,
+                    PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                    PackageManager.DONT_KILL_APP);
+         }catch (Exception e) {
+            Log.e(TAG, "failed to disableBootReceiver", e);
+        }        
     }
 
     private PendingIntent createOnDismissedIntent(Context context, int notificationId) {
