@@ -94,7 +94,7 @@ class AlarmUtil {
                     mp.stop();
                     mp.reset();
                     mp.release();
-                    Log.e(TAG, "release media player");
+                    Log.e(TAG, "release media player khaynaa");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
