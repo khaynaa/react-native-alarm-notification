@@ -85,7 +85,7 @@ class AlarmUtil {
         MediaPlayer mediaPlayer = audioInterface.getSingletonMedia(name, names);
         mediaPlayer.setLooping(shouldLoop);
         mediaPlayer.setVolume(number, number);
-        mediaPlayer.start();
+        //mediaPlayer.start();
 
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
@@ -430,17 +430,17 @@ class AlarmUtil {
 
                 // play vibration
                 if (alarm.isVibrate()) {
-                    Vibrator vibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
-                    if (vibrator.hasVibrator()) {
-                        vibrator.vibrate(VibrationEffect.createWaveform(vibrationPattern, 0));
-                    }
+                    // Vibrator vibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
+                    // if (vibrator.hasVibrator()) {
+                    //     vibrator.vibrate(VibrationEffect.createWaveform(vibrationPattern, 0));
+                    // }
                 }
 
                 mNotificationManager.createNotificationChannel(mChannel);
                 mBuilder.setChannelId(channelID);
             } else {
                 // set vibration
-                mBuilder.setVibrate(alarm.isVibrate() ? vibrationPattern : null);
+                //mBuilder.setVibrate(alarm.isVibrate() ? vibrationPattern : null);
             }
 
             //color
@@ -517,7 +517,7 @@ class AlarmUtil {
             Log.e(TAG, "stop vibration and alarm sound");
             Vibrator vibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
             if (vibrator.hasVibrator()) {
-                vibrator.cancel();
+                //vibrator.cancel();
             }
             audioInterface.stopPlayer();
         } catch (Exception e) {
@@ -543,7 +543,7 @@ class AlarmUtil {
             } else if (value instanceof Integer) {
                 map.putInt(key, (Integer) value);
             } else if (value instanceof Double) {
-                map.putDouble(key, (Double) value);
+                //map.putDouble(key, (Double) value);
             } else if (value instanceof String) {
                 map.putString(key, (String) value);
             } else {
