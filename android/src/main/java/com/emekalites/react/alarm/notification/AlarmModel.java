@@ -46,7 +46,11 @@ public class AlarmModel implements Serializable {
     }
 
     public void setId(int id) {
+        try{
         this.id = id;
+        }catch(Exception e){
+            
+        }
     }
 
     public int getSecond() {
