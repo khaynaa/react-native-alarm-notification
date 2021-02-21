@@ -543,7 +543,7 @@ class AlarmUtil {
             } else if (value instanceof Integer) {
                 map.putInt(key, (Integer) value);
             } else if (value instanceof Double) {
-                //map.putDouble(key, (Double) value);
+                map.putDouble(key, (Double) value);
             } else if (value instanceof String) {
                 map.putString(key, (String) value);
             } else {
